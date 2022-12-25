@@ -1,11 +1,27 @@
 import { useState } from 'react';
+import './Welcome.css';
+
+
+const profilePic = require('../../Profile_Picture.jpg');
 
 function Welcome() {
 
-
     return (
         <div>
-            This is the welcome page!
+            Welcome to this page!
+            <div id='welcomeContainer'>
+                <div id='profPic'>
+                    <img src={profilePic} alt='Sukeerth'></img>
+                </div>
+                <div id='menuContainer'>
+                    <ul>
+                        <option className='menuOption'>About Me</option>
+                        <option className='menuOption'>Experience</option>
+                        <option className='menuOption'>Projects</option>
+                        <option className='menuOption'>Education</option>
+                    </ul>
+                </div>
+            </div>
         </div>
     )
 }
