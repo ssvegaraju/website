@@ -4,7 +4,7 @@ import './Welcome.css';
 
 const profilePic = require('../../Profile_Picture.jpg');
 
-function Welcome() {
+function Welcome({ onSceneSelect }) {
 
     return (
         <div>
@@ -15,7 +15,7 @@ function Welcome() {
                 </div>
                 <div id='menuContainer'>
                     <ul>
-                        <option className='menuOption'>About Me</option>
+                        <option className='menuOption' onClick={(e) => onSceneSelect('AboutMe')}>About Me</option>
                         <option className='menuOption'>Experience</option>
                         <option className='menuOption'>Projects</option>
                         <option className='menuOption'>Education</option>

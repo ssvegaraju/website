@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Welcome from './Components/Welcome/Welcome';
 
@@ -10,18 +10,35 @@ const CurrentScene = {
   Projects: 'Projects',
 }
 
-function App() {
 
-  const [currentScene, setCurrentScene] = useState(CurrentScene.Welcome);
-  switch (currentScene) {
-    case CurrentScene.Welcome:
-      return <Welcome></Welcome>;
-    case CurrentScene.AboutMe:
-      break;
-    default:
-      break;
+export default class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentScene: CurrentScene.Welcome,
+    }
   }
-  return <div>You shouldn't be seeing this, something went wrong!</div>
-}
 
-export default App;
+  render() {
+    switch (this.state.currentScene) {
+      case CurrentScene.Welcome:
+        return <Welcome onSceneSelect={(scene) => {
+          this.setState({
+            currentScene: scene,
+          });
+        }}></Welcome>;
+      case CurrentScene.AboutMe:
+        break;
+      case CurrentScene.Experience:
+        break;
+      case CurrentScene.Projects:
+        break;
+      case CurrentScene.Education:
+        break;
+      default:
+        break;
+    }
+    return <div>You shouldn't be seeing this, something went wrong!</div>
+  }
+}
