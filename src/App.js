@@ -1,44 +1,44 @@
 import React, { useState } from 'react';
-import './App.css';
-import Welcome from './Components/Welcome/Welcome';
+import AboutMe from './Components/AboutMe/AboutMe';
+import Experience from './Components/Experience/Experience';
+import Projects from './Components/Projects/Projects';
+import Education from './Components/Education/Education';
 
-const CurrentScene = {
-  Welcome: 'Welcome',
-  AboutMe: 'AboutMe',
-  Experience: 'Experience',
-  Education: 'Education',
-  Projects: 'Projects',
-}
+import './App.css'
 
+function App() {
+  const [activeTab, setActiveTab] = useState('aboutMe');
 
-export default class App extends React.Component {
+  const handleTabClick = (tabName) => {
+    setActiveTab(tabName);
+  };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentScene: CurrentScene.Welcome,
-    }
-  }
-
-  render() {
-    switch (this.state.currentScene) {
-      case CurrentScene.Welcome:
-        return <Welcome onSceneSelect={(scene) => {
-          this.setState({
-            currentScene: scene,
-          });
-        }}></Welcome>;
-      case CurrentScene.AboutMe:
-        break;
-      case CurrentScene.Experience:
-        break;
-      case CurrentScene.Projects:
-        break;
-      case CurrentScene.Education:
-        break;
+  const tabContent = () => {
+    switch (activeTab) {
+      case 'aboutMe':
+        return <AboutMe />;
+      case 'experience':
+        return <Experience />;
+      case 'projects':
+        return <Projects />;
+      case 'education':
+        return <Education />;
       default:
-        break;
+        return null;
     }
-    return <div>You shouldn't be seeing this, something went wrong!</div>
   }
+
+  return (
+    <div className="App">
+      <div className="tabs">
+        <button className={activeTab === 'aboutMe' ? 'active tab' : 'tab'} onClick={() => handleTabClick('aboutMe')}>About Me</button>
+        <button className={activeTab === 'experience' ? 'active tab' : 'tab'} onClick={() => handleTabClick('experience')}>Experience</button>
+        <button className={activeTab === 'projects' ? 'active tab' : 'tab'} onClick={() => handleTabClick('projects')}>Projects</button>
+        <button className={activeTab === 'education' ? 'active tab' : 'tab'} onClick={() => handleTabClick('education')}>Education</button>
+      </div>
+      {tabContent()}
+    </div>
+  );
 }
+
+export default App;
