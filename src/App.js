@@ -3,11 +3,14 @@ import AboutMe from './Components/AboutMe/AboutMe';
 import Experience from './Components/Experience/Experience';
 import Projects from './Components/Projects/Projects';
 import Education from './Components/Education/Education';
+import "@cloudscape-design/global-styles/index.css"
+import { Button, Input, SpaceBetween, Container, Header, Tabs } from "@cloudscape-design/components"
 
 import './App.css'
 
 function App() {
   const [activeTab, setActiveTab] = useState('aboutMe');
+  const [value, setValue] = useState("");
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
@@ -28,15 +31,37 @@ function App() {
     }
   }
 
+  const tabs = [
+    {
+      label: 'About Me',
+      id: 'aboutme',
+      content: <AboutMe />
+    },
+    {
+      label: 'Experience',
+      id: 'experience',
+      content: <Experience />
+    },
+    {
+      label: 'Education',
+      id: 'education',
+      content: <Education />
+    },
+    {
+      label: 'Projects',
+      id: 'projects',
+      content: <Projects />
+    }
+  ]
+
   return (
     <div className="App">
-      <div className="tabs">
-        <button className={activeTab === 'aboutMe' ? 'active tab' : 'tab'} onClick={() => handleTabClick('aboutMe')}>About Me</button>
-        <button className={activeTab === 'experience' ? 'active tab' : 'tab'} onClick={() => handleTabClick('experience')}>Experience</button>
-        <button className={activeTab === 'projects' ? 'active tab' : 'tab'} onClick={() => handleTabClick('projects')}>Projects</button>
-        <button className={activeTab === 'education' ? 'active tab' : 'tab'} onClick={() => handleTabClick('education')}>Education</button>
-      </div>
-      {tabContent()}
+      <SpaceBetween size="m">
+        <Tabs
+          onChange={({ detail }) => setActiveTab(detail.activeTabId)}
+          tabs={tabs} ariaLabel="Resource details"
+        />
+      </SpaceBetween>
     </div>
   );
 }
